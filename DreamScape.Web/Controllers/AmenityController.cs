@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DreamScape.Application.Common.Interfaces;
+using DreamScape.Application.Common.Utility;
 using DreamScape.Domain.Entities;
 using DreamScape.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DreamScape.Web.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin)]
     public class AmenityController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

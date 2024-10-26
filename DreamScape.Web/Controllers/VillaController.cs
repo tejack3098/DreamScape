@@ -2,9 +2,11 @@
 using DreamScape.Application.Common.Interfaces;
 using DreamScape.Domain.Entities;
 using DreamScape.Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DreamScape.Web.Controllers
 {
+    [Authorize]
     public class VillaController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
