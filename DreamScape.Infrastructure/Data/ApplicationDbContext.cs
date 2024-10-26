@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DreamScape.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DreamScape.Infrastructure.Data
 {
-    public class ApplicationDbContext: DbContext
+    public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
         { 
@@ -20,9 +21,11 @@ namespace DreamScape.Infrastructure.Data
 
         public DbSet<Amenity> Amenities { get; set; }
 
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Villa>().HasData(
                   new Villa
