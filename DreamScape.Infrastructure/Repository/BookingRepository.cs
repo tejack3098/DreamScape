@@ -25,7 +25,7 @@ namespace DreamScape.Infrastructure.Repository
             _db.Amenities.Update(entity);
         }
 
-        public void UpdateStatus(int bookingId, string bookingStatus)
+        public void UpdateStatus(int bookingId, string bookingStatus, int villaNumber=0)
         {
             var bookingFromDb = _db.Bookings.FirstOrDefault(m => m.Id == bookingId);
 
@@ -34,6 +34,7 @@ namespace DreamScape.Infrastructure.Repository
                 bookingFromDb.Status = bookingStatus;
                 if (bookingStatus == SD.StatusCheckedIn)
                 {
+                    bookingFromDb.VillaNumber = villaNumber;
                     bookingFromDb.ActualCheckInDate = DateTime.Now;
                 }
 

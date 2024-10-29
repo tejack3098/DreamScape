@@ -55,5 +55,6 @@ namespace DreamScape.Domain.Entities
 
         [NotMapped]
         public List<VillaNumber> VillaNumbers { get; set; }
+
     }
 }
