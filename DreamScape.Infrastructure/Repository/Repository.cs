@@ -21,25 +21,22 @@ namespace DreamScape.Infrastructure.Repository
             dbSet.Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>>? filter, string? includeProperties = null)
+        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
-
             if (filter != null)
             {
                 query = query.Where(filter);
             }
-
             if (!string.IsNullOrEmpty(includeProperties))
             {
-                //Villa, VillaNumber (case-sensitive)
+                //Villa,VillaNumber -- case sensitive
                 foreach (var includeProp in includeProperties
-                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                             .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query.Include(includeProp);
+                    query = query.Include(includeProp);
                 }
             }
-
             return query.FirstOrDefault();
         }
 

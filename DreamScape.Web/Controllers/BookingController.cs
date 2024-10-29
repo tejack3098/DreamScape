@@ -101,7 +101,7 @@ namespace DreamScape.Web.Controllers
         public IActionResult BookingConfirmation(int bookingId)
         {
             Booking bookingFromdb = _unitOfWork.Booking.Get(u => u.Id == bookingId,
-                includeProperties: "User, Villa");
+                includeProperties: "User,Villa");
 
             if (bookingFromdb.Status == SD.StatusPending)
             {
@@ -145,5 +145,12 @@ namespace DreamScape.Web.Controllers
             return Json(new { data = objBookings });
         }
 
+        [Authorize]
+        public IActionResult BookingDetails(int bookingId)
+        {
+            Booking bookingFromDb = _unitOfWork.Booking.Get(u => u.Id == bookingId,
+                includeProperties: "User,Villa");
+            return View(bookingFromDb);
+        }
     }
 }
